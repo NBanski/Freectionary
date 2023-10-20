@@ -51,7 +51,7 @@ def main():
         # And now... return the dictionary in a Markdown-friendly manner.
         # And write it into a file.
         for word in meaningDict:
-            entry = f'***{word}***,\n' + meaningDict[word]
+            entry = f'***{word}***\n' + meaningDict[word]
             print(entry)
             with open('dictionary.txt', 'a', encoding="UTF-8") as f:
                 f.write(entry)
