@@ -28,30 +28,30 @@ def main():
 
         # Check the words in the Free Dictionary API.
         # And we also create a dictionary of words and meanings.
-        meaningDict = {}
+        meaning_dictionary = {}
         for word in words:
-            definitionCounter = 1
+            definition_counter = 1
             try:
                 meaning = ''
                 r = requests.get(
                     f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}'
                 )
                 # Get the first definition.
-                responseDictionary = r.json()[0]
-                meanings = responseDictionary['meanings']
+                response_dictionary = r.json()[0]
+                meanings = response_dictionary['meanings']
                 for element in meanings:
                     definitions = element['definitions']
                     for definition in definitions:
-                        meaning += str(definitionCounter) + '. ' + (definition['definition']) + '\n'
-                        definitionCounter += 1
-                meaningDict[word] = meaning
+                        meaning += str(definition_counter) + '. ' + (definition['definition']) + '\n'
+                        definition_counter += 1
+                meaning_dictionary[word] = meaning
             except Exception as e:
                 pass
 
         # And now... return the dictionary in a Markdown-friendly manner.
         # And write it into a file.
-        for word in meaningDict:
-            entry = f'***{word}***\n' + meaningDict[word]
+        for word in meaning_dictionary:
+            entry = f'***{word}***\n' + meaning_dictionary[word]
             print(entry)
             with open('dictionary.txt', 'a', encoding="UTF-8") as f:
                 f.write(entry)
